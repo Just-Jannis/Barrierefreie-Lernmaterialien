@@ -9,7 +9,7 @@ import:  https://raw.githubusercontent.com/Just-Jannis/Barrierefreie-Lernmateria
 
 -->
 
-# Einführung in die Lehveranstaltung
+# Barrierefreie Lernmaterialien
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/EUF-SpoWis/M1_Einfuehrung_Sportwissenschaft/main/00_Einfuehrung.md#1)
 
@@ -23,3 +23,27 @@ import:  https://raw.githubusercontent.com/Just-Jannis/Barrierefreie-Lernmateria
 | **Autoren:**             | @author                                                                                         |
 
 > (c) Alle Rechte vorbehalten. 
+
+## Multimediaprinzip
+
+im Aufbau
+
+## Segmentierungsprinzip
+
+im Aufbau
+
+## Kontinguitätsprinzip
+
+im Aufbau
+
+## Signalisierungsprinzip
+
+im Aufbau
+
+## Personalisierungsprinzip
+
+im Aufbau
+
+## Antropomorphisierungsprinzip
+
+im Aufbau
