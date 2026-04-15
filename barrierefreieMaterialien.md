@@ -9,6 +9,7 @@ import:  https://raw.githubusercontent.com/Just-Jannis/Barrierefreie-Lernmateria
 
 -->
 
+
 # Lernmaterialien in Bewegung, Spiel und Sport
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/EUF-SpoWis/M1_Einfuehrung_Sportwissenschaft/main/00_Einfuehrung.md#1)
@@ -30,13 +31,18 @@ Es stellt sich daher nun zurecht die Frage, welche Kennzeichen es für gelungene
 
 
 ## Kennzeichen für gelungenes Lernmaterial
+Gelungenes Lernmaterial zeichnet sich durch die Berücksichtigung der folgenden fachübergreifenden Prinzipien aus: Multimediaprinzip, Segmentierungsprinzip, Kontinguitätsprinzip, Signalisierungsprinzip, Personalisierungsprinzip und Antropomorphisierungsprinzip. Diese Prinzipien wurden überwiegend von Experimenten abgeleitet, in denen zwei verschiedene Lerngruppen mit jeweils verschieden gestalteten Lernmaterialien ausgestattet wurden. Dabei wurde festgestellt, dass die Gruppen am erfolgreichsten lernen konnten, deren Lernmaterial die oben genannten Prinzipien berücksichtigt hat. Was diese Prinzipien im Einzelnen bedeuten, dass wollen wir uns jetzt Schritt für Schritt anschauen und anhand eines Beispiels druchgehen.
 
+~~**Beispiel:**~~
+Stellen wir uns vor wir führen mit der Klasse einen Kraftzirkel durch, bei dem die Schüler:innen an mehreren Stationen verschiedene Übungen durchführen sollen. Wir als Lehrkraft möchten nun Stationskarten entwerfen, damit die Schüler:innen an den Stationen selbstständig arbeiten können. Wir beginnen, indem wir lediglich die auszuführende Übung mit worten beschreiben. Dies könnte beispielsweise folgendermaßen aussehen:
 
+<img src="img/Material1.jpg" style="border: 3px solid black; padding: 5px; width: 300px;" />
 
+Ob alle Schüler:innen mit dieser Art der Stationskarten jedoch zurechtkommen würden ist fragwürdig. Tatsächlich ist hier nicht eins der oben genannten Prinzipien erfüllt. Wir gehen daher nun die besagten Prinzipien durch und passen dabei unsere entworfene Stationskarte stetig an, um auf diese Weise gelungenes Lernmaterial zu erhalten.
 
 ### Multimediaprinzip
 
-im Aufbau
+<img src="img/Material2.jpg" style="border: 3px solid black; padding: 5px; width: 300px;" />
 
 ### Segmentierungsprinzip
 
