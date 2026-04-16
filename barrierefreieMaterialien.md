@@ -59,7 +59,7 @@ Aktuell Haben wir auf unserer Stationskarte lediglich Text, in dem die durchzuf�
 
 </div>
 
-### Segmentierungsprinzip
+### Segmentierungsprinzip📋
 Aktuell besteht unsere Stationskarte aus einer Kombination aus Text und begleitenden Bildern, welche die Übungen zeigen. Die Bilder allein reichen jedoch nicht aus, um die Übung vollständig zu verstehen. Das Lesen des Textes ist also immernoch essentiell für die Bearbeitung. Hier findet nun das zweite Prinzip, das Segmentierungsprinzip, Anwendung, denn für einen verbesserten Lerneffekt sollten die Informationen in leicht verständliche Absschnitte unterteilt werden (Rey et al., 2018). Noch misst unser Text jegliche Form der Unterteilung in sinvolle Abschnitte. Eine denkbare Unterteilung wäre "Ausgangspoition -> Aufgabe -> Hinweis auf mögliche Falschausfürhung". Auf diese Weise könnten sich die Schüler:innen gewissermaßen an den einzelnen Punkten "entlang hangeln" um die Übung durchzuführen. Die Unterteilung könnte folgendermaßen aussehen:
 
 <div style="display: flex; align-items: center; gap: 15px;">
@@ -80,15 +80,57 @@ Aktuell besteht unsere Stationskarte aus einer Kombination aus Text und begleite
 
 ### Kontinguitätsprinzip
 
-im Aufbau
+<div style="display: flex; align-items: center; gap: 15px;">
+  
+  <div style="text-align: center;">
+    <img src="img/Material3.jpg" style="width: 300px; border: 2px solid black;" />
+    <p>Ohne Segmentierung</p>
+  </div>
+
+  <div style="font-size: 40px;">➡️</div>
+
+  <div style="text-align: center;">
+    <img src="img/Material4.jpg" style="width: 300px; border: 2px solid black;" />
+    <p>Mit Segmentierung</p>
+  </div>
+
+</div>
 
 ### Signalisierungsprinzip
 
-im Aufbau
+<div style="display: flex; align-items: center; gap: 15px;">
+  
+  <div style="text-align: center;">
+    <img src="img/Material4.jpg" style="width: 300px; border: 2px solid black;" />
+    <p>Ohne Segmentierung</p>
+  </div>
+
+  <div style="font-size: 40px;">➡️</div>
+
+  <div style="text-align: center;">
+    <img src="img/Material5.jpg" style="width: 300px; border: 2px solid black;" />
+    <p>Mit Segmentierung</p>
+  </div>
+
+</div>
 
 ### Personalisierungsprinzip
 
-im Aufbau
+<div style="display: flex; align-items: center; gap: 15px;">
+  
+  <div style="text-align: center;">
+    <img src="img/Material5.jpg" style="width: 300px; border: 2px solid black;" />
+    <p>Ohne Segmentierung</p>
+  </div>
+
+  <div style="font-size: 40px;">➡️</div>
+
+  <div style="text-align: center;">
+    <img src="img/Material6.jpg" style="width: 300px; border: 2px solid black;" />
+    <p>Mit Segmentierung</p>
+  </div>
+
+</div>
 
 ### Antropomorphisierungsprinzip
 
