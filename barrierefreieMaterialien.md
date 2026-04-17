@@ -12,7 +12,7 @@ import:  https://raw.githubusercontent.com/Just-Jannis/Barrierefreie-Lernmateria
 
 # Lernmaterialien in Bewegung, Spiel und Sport
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://raw.githubusercontent.com/Just-Jannis/Barrierefreie-Lernmaterialien/refs/heads/main/barrierefreieMaterialien.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/Just-Jannis/Barrierefreie-Lernmaterialien/main/barrierefreieMaterialien.md#1)
 
 | Parameter                | Kursinformationen                                                                               |
 | ------------------------ | ----------------------------------------------------------------------------------------------- |
