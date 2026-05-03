@@ -47,7 +47,7 @@ Gelungenes Lernmaterial zeichnet sich durch die Berücksichtigung der folgenden 
 --{{0}}-- 
 Stellen wir uns vor wir führen mit der Klasse einen Kraftzirkel durch, bei dem die Schüler:innen an mehreren Stationen verschiedene Übungen durchführen sollen. Wir als Lehrkraft möchten nun Stationskarten entwerfen, damit die Schüler:innen an den Stationen selbstständig arbeiten können. Wir beginnen, indem wir lediglich die auszuführende Übung mit worten beschreiben. Dies könnte beispielsweise folgendermaßen aussehen:
 
-![Stationskarte](img/Startpunkt.jpg "Stationskarte")
+![Stationskarte](img/Startpunkt.jpg "Mögliche Stationskarte")
 
 --{{0}}--
 Ob alle Schüler:innen mit dieser Art der Stationskarten jedoch zurechtkommen würden ist fragwürdig. Tatsächlich ist hier nicht eins der oben genannten Prinzipien erfüllt. Wir gehen daher nun die besagten Prinzipien durch und passen dabei unsere entworfene Stationskarte stetig an, um auf diese Weise gelungenes Lernmaterial zu erhalten.
@@ -57,35 +57,35 @@ Ob alle Schüler:innen mit dieser Art der Stationskarten jedoch zurechtkommen w�
 --{{0}}--
 Aktuell Haben wir auf unserer Stationskarte lediglich Text, in dem die durchzuführende Übung beschrieben wird. Schüler:innen, die möglicherweise keinen ausgeprägten sportlichen Hintergrund haben, könnten Schwierigkeiten bei der Umsetzung haben. Aber auch eine Lese-Rechtschreib-Schwäche (LRS) könnte es den betroffenen Kindern und Jugendlichen erschwerern, den Arbeitsauftrag zu verstehen. Um unsere Stationskarte dahingehend zu verbessern, sollten wir das Multimediaprinzip berücksichtigen. Dieses besagt, dass die Schüler:innen besser lernen können, wenn mehr als eine Darstellungsform angeboten wird (Fletcher & Tobias, 2005). In unserem Fall haben wir lediglich Text als Darstellungsform. Wir könnten diese z.B. durch Bilder, die die Durchführung der Übung zeigen, ergänzen und so eine Kombination von mehereren Darstellungsformen (Text + Bild) erzeugen. Dies könnte bspw. folgendermaßen aussehen:
 
-![Multimedia](img/Multimediaprinzip.jpg "Ohne vs. mit Berücksichtigung des Multimediaprinzips")
+![Multimedia](img/Multimediaprinzip.jpg "Ohne Berücksichtigung des Multimediaprinzips (links) vs. mit Berücksichtigung des Multimediaprinzips (rechts)")
 
 ### Segmentierungsprinzip
 
 --{{0}}--
 Aktuell besteht unsere Stationskarte aus einer Kombination aus Text und begleitenden Bildern, welche die Übungen zeigen. Die Bilder allein reichen jedoch nicht aus, um die Übung vollständig zu verstehen. Das Lesen des Textes ist also immernoch essentiell für die Bearbeitung. Hier findet nun das zweite Prinzip, das Segmentierungsprinzip, Anwendung, denn für einen verbesserten Lerneffekt sollten die Informationen in leicht verständliche Absschnitte unterteilt werden (Rey et al., 2018). Noch misst unser Text jegliche Form der Unterteilung in sinvolle Abschnitte. Eine denkbare Unterteilung wäre "Ausgangspoition -> Aufgabe -> Hinweis auf mögliche Falschausfürhung". Auf diese Weise könnten sich die Schüler:innen gewissermaßen an den einzelnen Punkten "entlang hangeln" um die Übung durchzuführen. Die Unterteilung könnte folgendermaßen aussehen:
 
-![Segmentierung](img/Segmentierungsprinzip.jpeg "Ohne Segmentierung vs. mit Segmentierung")
+![Segmentierung](img/Segmentierungsprinzip.jpeg "Ohne Berücksichtigung des Segmentierungsprinzips (links) vs. mit Berücksichtigung des Segmentierungsprinzips (rechts)")
 
 ### Kontinguitätsprinzip
 
 --{{0}}--
 Unsere Stationskarte berücksichtigt bereits sowohl das Multimediaprinzip, als auch das Segmentierungsprinzip. Die Abbildungen, die die Ausgangsposotion, sowie eine fehlerhafte Ausführung zeigen, sind jedoch aktuell beide oben auf der Stationskarte eingefügt. Die Schüler:innen könnten also möglicherweise Schwierigkeiten haben zu verstehen, auf welche Abschnitte sich die Bilder beziehen. Eine Brücksichtigung des Kontinguitätsprinzips hilft eine mögliche Verwirrung der Schüler*innen zu vermeiden. Laut diesem Prinzip sollen die verschiedenen Darstellungsformen, die genutzt werden, auch nah beieinander präsentiert werden. Für uns bedeutet das, dass das Bild, welches die Ausgangsposition zeigt, sich auf der Stationskarte auch nah bei dem Text befinden sollte, der die Ausgangsposition beschreibt. Gleiches gilt für die fehlerhafte Ausführung. Durch eine derartige Darstellung von Bild und Text verstehen die Schüler:innen, dass beide Darstellungsformen zusammen gehören. Es folgt eine mögliche Umsetzung auf der Stationskarte:
 
-![Kontinguität](img/Kontinguitaetsprinzip.jpeg "Ohne Kontinguität vs. mit Kontinguität")
+![Kontinguität](img/Kontinguitaetsprinzip.jpeg "Ohne Berücksichtigung des Kontinguitätsprinzips (links) vs. mit Berücksichtigung des Kontinguitätsprinzips (rechts)")
 
 ### Signalisierungsprinzip
 
 --{{0}}--
 Der Text, der auf unserer Stationskarte zufinden ist, ist bereits in sinvolle Abschnitte unterteilt, welche von Abbildungen begleitet werden. Die Abbildung allein reichen jedoch nicht aus, um die Übung korrekt ausführen zu können. Wichtige merkmale der Bewegung sind dem Text zu entnehmen. Manche Schüler:innen könnten dabei Probleme haben. Um die Kinder und Jugendlichen dabei zu entlasten sollten wir das Signalisierungsprinzip berücksichtigen. Wichtige Stellen im Text sollten hervorgehoben werden (z.B. fetter Text, andere Farbe, etc.). Zusätzlich könnten Verweise auf die vorhandenen Abbildungen eingebaut werden. Auf unserer Stationskarte könnte dies bspw. folgendermaßen umgesetzt werden:
 
-![Signalisierung](img/Signalisierungsprinzip.jpeg "Mit vs. ohne Signalisierung")
+![Signalisierung](img/Signalisierungsprinzip.jpeg "Ohne Berücksichtigung des Signalisierungsprinzips (links) vs. mit Berücksichtigung des Signalisierungsprinzips (rechts)")
 
 ### Personalisierungsprinzip
 
 --{{0}}--
 Wir sind mit unserer Stationskarte auf einem sehr guten Weg. Wir sollten jedoch abschließend das Personalisierungsprinzip berücksichtigen. Aktuell ist der Text sehr allgemein formuliert (z.B. "Man kniet vor dem Kasten, sodass...", "Die Hände laufen so nah wie möglich...", etc.). Laut dem Personalisierungsprinzip sollte vermehrt Umgangssprache anstelle formaler Ausdrücke verwendet werden. Wir können also die allgemeinen Aussagen personaliesieren ("Knie dich vor den Kasten" statt "Man kniet vor dem Kasten"). Dies hilft den Schüler:innen den Bewegungsauftrag umzusetzen. Wir könnten die Stationskarte also folgendermaßen personalisieren:
 
-![Personalisierung](img/Personalisierungsprinzip.jpeg "Unpersonalisiert vs. personalisiert")
+![Personalisierung](img/Personalisierungsprinzip.jpeg "Ohne Berücksichtigung des Personalisierungsprinzips (links) vs. mit Berücksichtigung des Personalisierungsprinzips (rechts)")
 
 ### Antropomorphisierungsprinzip
 
