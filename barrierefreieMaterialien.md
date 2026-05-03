@@ -43,7 +43,7 @@ Diese Prinzipien wurden überwiegend von Experimenten abgeleitet, in denen zwei 
 ~~**Beispiel:**~~
 Stellen wir uns vor wir führen mit der Klasse einen Kraftzirkel durch, bei dem die Schüler:innen an mehreren Stationen verschiedene Übungen durchführen sollen. Wir als Lehrkraft möchten nun Stationskarten entwerfen, damit die Schüler:innen an den Stationen selbstständig arbeiten können. Wir beginnen, indem wir lediglich die auszuführende Übung mit worten beschreiben. Dies könnte beispielsweise folgendermaßen aussehen:
 
-![Stationskarte](img/Startpunkt.jpg "Stationskarte")
+![Stationskarte](img/Startpunkt.jpg "Stationskarte"){width=50%}
 
 Ob alle Schüler:innen mit dieser Art der Stationskarten jedoch zurechtkommen würden ist fragwürdig. Tatsächlich ist hier nicht eins der oben genannten Prinzipien erfüllt. Wir gehen daher nun die besagten Prinzipien durch und passen dabei unsere entworfene Stationskarte stetig an, um auf diese Weise gelungenes Lernmaterial zu erhalten.
 
