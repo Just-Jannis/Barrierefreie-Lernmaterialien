@@ -39,7 +39,7 @@ Gelungenes Lernmaterial zeichnet sich durch die Berücksichtigung der folgenden 
 * Personalisierungsprinzip
 * Antropomorphisierungsprinzip. 
 
-<!--Diese Prinzipien wurden überwiegend von Experimenten abgeleitet, in denen zwei verschiedene Lerngruppen mit jeweils verschieden gestalteten Lernmaterialien ausgestattet wurden. Dabei wurde festgestellt, dass die Gruppen am erfolgreichsten lernen konnten, deren Lernmaterial die oben genannten Prinzipien berücksichtigt hat. Was diese Prinzipien im Einzelnen bedeuten, dass wollen wir uns jetzt Schritt für Schritt anschauen und anhand eines Beispiels druchgehen.-->
+{0} Diese Prinzipien wurden überwiegend von Experimenten abgeleitet, in denen zwei verschiedene Lerngruppen mit jeweils verschieden gestalteten Lernmaterialien ausgestattet wurden. Dabei wurde festgestellt, dass die Gruppen am erfolgreichsten lernen konnten, deren Lernmaterial die oben genannten Prinzipien berücksichtigt hat. Was diese Prinzipien im Einzelnen bedeuten, dass wollen wir uns jetzt Schritt für Schritt anschauen und anhand eines Beispiels druchgehen.
 
 ~~**Beispiel:**~~
 Stellen wir uns vor wir führen mit der Klasse einen Kraftzirkel durch, bei dem die Schüler:innen an mehreren Stationen verschiedene Übungen durchführen sollen. Wir als Lehrkraft möchten nun Stationskarten entwerfen, damit die Schüler:innen an den Stationen selbstständig arbeiten können. Wir beginnen, indem wir lediglich die auszuführende Übung mit worten beschreiben. Dies könnte beispielsweise folgendermaßen aussehen:
