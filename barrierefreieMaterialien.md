@@ -83,7 +83,7 @@ Der Text, der auf unserer Stationskarte zufinden ist, ist bereits in sinvolle Ab
 ### Personalisierungsprinzip
 
 --{{0}}--
-
+Wir sind mit unserer Stationskarte auf einem sehr guten Weg. Wir sollten jedoch abschließend das Personalisierungsprinzip berücksichtigen. Aktuell ist der Text sehr allgemein formuliert (z.B. "Man kniet vor dem Kasten, sodass...", "Die Hände laufen so nah wie möglich...", etc.). Laut dem Personalisierungsprinzip sollte vermehrt Umgangssprache anstelle formaler Ausdrücke verwendet werden. Wir können also die allgemeinen Aussagen personaliesieren ("Knie dich vor den Kasten" statt "Man kniet vor dem Kasten"). Dies hilft den Schüler:innen den Bewegungsauftrag umzusetzen. Wir könnten die Stationskarte also folgendermaßen personalisieren:
 
 ![Personalisierung](img/Personalisierungsprinzip.jpeg "Unpersonalisiert vs. personalisiert")
 
