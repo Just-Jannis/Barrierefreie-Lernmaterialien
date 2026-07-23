@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gütekriterien interaktiv verstehen</title>
+<style>
+  :root{
+    --bg:#f7f8fb; --card:#ffffff; --text:#1f2937; --muted:#667085; --line:#d8dee9;
+    --soft:#eef2f7; --accent:#315efb; --success:#157f3b; --danger:#b42318;
+    --shadow:0 12px 32px rgba(31,41,55,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+  .wrap{max-width:1180px;margin:auto;padding:28px 18px 60px}
+  header{background:linear-gradient(135deg,#fff,#eef3ff);border:1px solid var(--line);border-radius:24px;padding:28px;box-shadow:var(--shadow);margin-bottom:20px}
+  h1{margin:0 0 8px;font-size:clamp(28px,5vw,44px);letter-spacing:-.03em}
+  h2{margin:0 0 14px;font-size:24px}
+  h3{margin:0 0 10px;font-size:18px}
+  p{margin:0 0 12px}
+  .lead{font-size:18px;color:var(--muted);max-width:900px}
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:var(--shadow)}
+  .span12{grid-column:span 12}.span7{grid-column:span 7}.span5{grid-column:span 5}.span6{grid-column:span 6}
+  @media(max-width:900px){.span7,.span5,.span6{grid-column:span 12}}
+  .tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0 18px}
+  @media(max-width:700px){.tabs{grid-template-columns:1fr}}
+  .tab{appearance:none;border:1px solid var(--line);background:#fff;border-radius:14px;padding:14px 10px;font-weight:800;cursor:pointer}
+  .tab.active{border-color:var(--accent);outline:3px solid rgba(49,94,251,.12);color:var(--accent)}
+  .badge{display:inline-block;padding:5px 9px;border-radius:999px;background:var(--soft);font-size:13px;font-weight:700;margin:0 6px 6px 0}
+  .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+  @media(max-width:700px){.feature-grid{grid-template-columns:1fr}}
+  .feature{border:1px solid var(--line);border-radius:14px;padding:13px;background:#fafbfc}
+  .feature strong{display:block;margin-bottom:4px}
+  .fact{background:#f6f8ff;border-left:4px solid var(--accent);padding:12px 14px;border-radius:10px;margin-top:14px}
+  .chain{display:flex;gap:10px;align-items:stretch;margin-top:16px}
+  @media(max-width:750px){.chain{flex-direction:column}}
+  .chain-step{flex:1;border:1px solid var(--line);border-radius:14px;padding:15px;background:#fff;text-align:center}
+  .chain-arrow{align-self:center;font-size:26px;color:var(--muted)}
+  .scenario{border:1px solid var(--line);border-radius:16px;padding:16px;background:#fafbfc}
+  select,input[type="range"]{width:100%}
+  select{padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff}
+  .meter-row{margin:14px 0}
+  .meter-label{display:flex;justify-content:space-between;gap:12px;font-weight:700}
+  .bar{height:16px;background:#e9edf4;border-radius:999px;overflow:hidden;margin-top:6px}
+  .fill{height:100%;background:var(--accent);width:50%;transition:.2s}
+  .answers{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+  @media(max-width:700px){.answers{grid-template-columns:1fr}}
+  .answer{border:1px solid var(--line);background:#fff;border-radius:12px;padding:12px;font-weight:700;cursor:pointer;text-align:left}
+  .answer.correct{border-color:#6ec28d;background:#f1fbf4}
+  .answer.wrong{border-color:#e39a94;background:#fff5f4}
+  .feedback{margin-top:12px;min-height:50px;font-weight:650}
+  .ok{color:var(--success)}.bad{color:var(--danger)}
+  .controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+  button.primary{appearance:none;border:0;background:var(--accent);color:#fff;border-radius:10px;padding:10px 14px;cursor:pointer;font-weight:800}
+  button.secondary{appearance:none;border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 12px;cursor:pointer;font-weight:700}
+  .matrix{display:grid;grid-template-columns:1.3fr repeat(3,1fr);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .cell{padding:11px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff}
+  .cell.head{font-weight:800;background:#fafbfc}
+  .cell.center{text-align:center;font-weight:800}
+  .small{font-size:13px;color:var(--muted)}
+  .case-list{display:grid;gap:10px}
+  .case{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff}
+  .footer-note{margin-top:18px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Gütekriterien interaktiv verstehen</h1>
+  <p class="lead">Unterscheide Objektivität, Reliabilität und Validität – und entdecke, warum gute Messungen mehr brauchen als nur „irgendwie richtige“ Ergebnisse.</p>
+</header>
+
+<div class="grid">
+  <section class="card span12">
+    <h2>1. Die drei zentralen Gütekriterien</h2>
+    <div class="tabs" id="tabs"></div>
+    <div id="criterionIntro"></div>
+    <div class="feature-grid" id="featureGrid"></div>
+    <div class="fact" id="criterionFact"></div>
+
+    <div class="chain">
+      <div class="chain-step"><strong>Objektivität</strong><br><span class="small">Unabhängig von der untersuchenden Person?</span></div>
+      <div class="chain-arrow">→</div>
+      <div class="chain-step"><strong>Reliabilität</strong><br><span class="small">Zuverlässig und präzise gemessen?</span></div>
+      <div class="chain-arrow">→</div>
+      <div class="chain-step"><strong>Validität</strong><br><span class="small">Wird wirklich das Richtige gemessen?</span></div>
+    </div>
+  </section>
+
+  <section class="card span6">
+    <h2>2. Messinstrument-Simulator</h2>
+    <p>Verändere die Eigenschaften eines fiktiven Tests und beobachte, welche Gütekriterien darunter leiden.</p>
+    <div class="scenario">
+      <div class="meter-row">
+        <div class="meter-label"><span>Einfluss der testenden Person</span><span id="objVal">20%</span></div>
+        <input id="objRange" type="range" min="0" max="100" value="20">
+      </div>
+      <div class="meter-row">
+        <div class="meter-label"><span>Zufällige Messfehler / Schwankungen</span><span id="relVal">20%</span></div>
+        <input id="relRange" type="range" min="0" max="100" value="20">
+      </div>
+      <div class="meter-row">
+        <div class="meter-label"><span>Fehlpassung zum eigentlichen Merkmal</span><span id="valVal">20%</span></div>
+        <input id="valRange" type="range" min="0" max="100" value="20">
+      </div>
+
+      <div class="meter-row">
+        <div class="meter-label"><span>Objektivität</span><span id="objScore"></span></div>
+        <div class="bar"><div class="fill" id="objFill"></div></div>
+      </div>
+      <div class="meter-row">
+        <div class="meter-label"><span>Reliabilität</span><span id="relScore"></span></div>
+        <div class="bar"><div class="fill" id="relFill"></div></div>
+      </div>
+      <div class="meter-row">
+        <div class="meter-label"><span>Validität</span><span id="valScore"></span></div>
+        <div class="bar"><div class="fill" id="valFill"></div></div>
+      </div>
+      <div class="fact" id="simFact"></div>
+    </div>
+  </section>
+
+  <section class="card span6">
+    <h2>3. Mini-Quiz: Welches Gütekriterium ist betroffen?</h2>
+    <div class="scenario">
+      <h3 id="quizQuestion"></h3>
+      <div class="small" id="quizMeta"></div>
+      <div class="answers" id="answers"></div>
+      <div class="feedback" id="feedback"></div>
+      <div class="controls">
+        <button class="primary" id="nextBtn">Nächstes Beispiel</button>
+        <button class="secondary" id="revealBtn">Erklärung zeigen</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="card span7">
+    <h2>4. Objektivität genauer</h2>
+    <p>Objektivität wird häufig in drei Teilbereiche unterteilt.</p>
+    <div class="matrix">
+      <div class="cell head">Teilbereich</div><div class="cell head">Frage</div><div class="cell head">Problembeispiel</div><div class="cell head">Verbesserung</div>
+      <div class="cell"><strong>Durchführungsobjektivität</strong></div><div class="cell">Läuft die Untersuchung für alle gleich ab?</div><div class="cell">Eine Gruppe bekommt zusätzliche Hinweise.</div><div class="cell">Standardisierte Instruktionen.</div>
+      <div class="cell"><strong>Auswertungsobjektivität</strong></div><div class="cell">Kommen Auswertende zum selben Ergebnis?</div><div class="cell">Offene Antworten werden unterschiedlich bewertet.</div><div class="cell">Klare Kodier- und Bewertungsregeln.</div>
+      <div class="cell"><strong>Interpretationsobjektivität</strong></div><div class="cell">Werden Ergebnisse gleich gedeutet?</div><div class="cell">Der gleiche Testwert wird verschieden interpretiert.</div><div class="cell">Normen, Cut-offs und klare Interpretationsregeln.</div>
+    </div>
+  </section>
+
+  <section class="card span5">
+    <h2>5. Validität: „Messe ich wirklich das Richtige?“</h2>
+    <div class="case-list">
+      <div class="case"><strong>Inhaltsvalidität</strong><br><span class="small">Deckt der Test den relevanten Inhaltsbereich angemessen ab?</span></div>
+      <div class="case"><strong>Kriteriumsvalidität</strong><br><span class="small">Hängen die Testwerte sinnvoll mit einem relevanten Außenkriterium zusammen?</span></div>
+      <div class="case"><strong>Konstruktvalidität</strong><br><span class="small">Misst das Instrument tatsächlich das theoretische Konstrukt, das es messen soll?</span></div>
+    </div>
+    <div class="fact">Ein Test kann <strong>sehr zuverlässig</strong> sein und trotzdem <strong>nicht valide</strong>: Ein falsch kalibrierter Maßstab kann jedes Mal denselben falschen Wert anzeigen.</div>
+  </section>
+
+  <section class="card span12">
+    <h2>Merksatz</h2>
+    <p><strong>Objektiv</strong> = unabhängig von der Person, die misst. <strong>Reliabel</strong> = zuverlässig und präzise. <strong>Valide</strong> = inhaltlich zutreffend und misst wirklich das beabsichtigte Merkmal.</p>
+    <p class="footer-note">Hinweis: Das Tool konzentriert sich auf die klassischen Hauptgütekriterien quantitativer Forschung. Je nach Fach und Lehrbuch werden zusätzliche Nebengütekriterien wie Ökonomie, Zumutbarkeit, Normierung oder Fairness ergänzt.</p>
+  </section>
+</div>
+</div>
+
+<script>
+const criteria = {
+  objectivity:{
+    name:"Objektivität",
+    question:"Ist das Ergebnis unabhängig davon, wer die Untersuchung durchführt, auswertet oder interpretiert?",
+    examples:["standardisierte Instruktionen","klare Bewertungsregeln","gleiche Bedingungen für alle"],
+    features:["Durchführung","Auswertung","Interpretation"],
+    fact:"Hohe Objektivität bedeutet: Verschiedene Forschende sollten unter gleichen Bedingungen möglichst zu denselben Ergebnissen kommen."
+  },
+  reliability:{
+    name:"Reliabilität",
+    question:"Misst das Instrument zuverlässig, präzise und mit möglichst wenig zufälligem Messfehler?",
+    examples:["Test-Retest-Reliabilität","Paralleltest-Reliabilität","interne Konsistenz"],
+    features:["Stabilität","Messgenauigkeit","geringe Zufallsfehler"],
+    fact:"Ein reliables Instrument liefert bei Wiederholung unter vergleichbaren Bedingungen ähnliche Ergebnisse."
+  },
+  validity:{
+    name:"Validität",
+    question:"Misst das Instrument wirklich das Merkmal, das es messen soll?",
+    examples:["Inhaltsvalidität","Kriteriumsvalidität","Konstruktvalidität"],
+    features:["inhaltliche Passung","Bezug zum Konstrukt","sinnvolle Schlussfolgerungen"],
+    fact:"Validität ist die entscheidende Frage nach der Gültigkeit einer Messung: Sind die Schlussfolgerungen aus den Messwerten tatsächlich gerechtfertigt?"
+  }
+};
+const order=["objectivity","reliability","validity"];
+let current="objectivity";
+
+document.getElementById("tabs").innerHTML=order.map(k=>`<button class="tab" data-key="${k}">${criteria[k].name}</button>`).join("");
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>renderCriterion(b.dataset.key)));
+
+function renderCriterion(k){
+  current=k;
+  document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.key===k));
+  const c=criteria[k];
+  document.getElementById("criterionIntro").innerHTML=`<h3>${c.name}</h3><p><strong>Leitfrage:</strong> ${c.question}</p><div>${c.examples.map(x=>`<span class="badge">${x}</span>`).join("")}</div>`;
+  document.getElementById("featureGrid").innerHTML=c.features.map(x=>`<div class="feature"><strong>✓ ${x}</strong><span>zentraler Aspekt von ${c.name}</span></div>`).join("");
+  document.getElementById("criterionFact").innerHTML=`<strong>Kernidee:</strong> ${c.fact}`;
+}
+renderCriterion("objectivity");
+
+const objRange=document.getElementById("objRange");
+const relRange=document.getElementById("relRange");
+const valRange=document.getElementById("valRange");
+
+function updateSimulator(){
+  const objErr=+objRange.value, relErr=+relRange.value, valErr=+valRange.value;
+  const obj=Math.max(0,100-objErr);
+  const rel=Math.max(0,100-relErr);
+  // didaktische Vereinfachung: Validität leidet besonders an Fehlpassung, zusätzlich etwas an sehr niedriger Reliabilität
+  const val=Math.max(0,Math.round((100-valErr)*(.55+.45*rel/100)));
+
+  document.getElementById("objVal").textContent=objErr+"%";
+  document.getElementById("relVal").textContent=relErr+"%";
+  document.getElementById("valVal").textContent=valErr+"%";
+
+  [["obj",obj],["rel",rel],["val",val]].forEach(([id,v])=>{
+    document.getElementById(id+"Score").textContent=v+"%";
+    document.getElementById(id+"Fill").style.width=v+"%";
+  });
+
+  let msg=[];
+  if(obj<60) msg.push("Die Ergebnisse hängen stark von der untersuchenden Person ab → geringe Objektivität.");
+  if(rel<60) msg.push("Die Messung schwankt stark → geringe Reliabilität.");
+  if(val<60) msg.push("Das Instrument erfasst das Zielmerkmal nur unzureichend → geringe Validität.");
+  if(msg.length===0) msg.push("Die Bedingungen sind günstig: Die Messung ist weitgehend standardisiert, zuverlässig und passend zum Zielmerkmal.");
+  document.getElementById("simFact").innerHTML=msg.join(" ");
+}
+[objRange,relRange,valRange].forEach(r=>r.addEventListener("input",updateSimulator));
+updateSimulator();
+
+const quiz=[
+  {q:"Zwei Lehrkräfte bewerten dieselbe offene Antwort sehr unterschiedlich.",a:"objectivity",why:"Das ist vor allem ein Problem der Auswertungsobjektivität. Klare Bewertungsregeln könnten helfen."},
+  {q:"Eine Person bearbeitet denselben Test zweimal unter ähnlichen Bedingungen und erzielt stark unterschiedliche Werte.",a:"reliability",why:"Die Messung ist nicht stabil genug. Das deutet auf geringe Reliabilität hin."},
+  {q:"Ein Test soll mathematisches Verständnis messen, besteht aber fast nur aus Aufgaben zum schnellen Kopfrechnen.",a:"validity",why:"Der Test bildet das Zielkonstrukt nur unzureichend ab. Das ist ein Validitätsproblem."},
+  {q:"Eine Versuchsleiterin erklärt der einen Gruppe die Aufgabe ausführlicher als der anderen.",a:"objectivity",why:"Die Durchführung hängt von der leitenden Person ab. Die Durchführungsobjektivität ist beeinträchtigt."},
+  {q:"Eine Waage zeigt bei fünf direkt aufeinanderfolgenden Messungen 70,1 kg, 74,8 kg, 68,9 kg, 73,2 kg und 69,5 kg.",a:"reliability",why:"Die Werte schwanken stark, obwohl sich das Gewicht kaum verändert haben kann. Die Messung ist unzuverlässig."},
+  {q:"Ein Fragebogen zur Prüfungsangst misst hauptsächlich allgemeine Müdigkeit und Stress.",a:"validity",why:"Das Instrument misst offenbar nicht spezifisch das beabsichtigte Konstrukt Prüfungsangst."},
+  {q:"Alle Teilnehmenden bekommen exakt dieselben schriftlichen Anweisungen und dieselbe Bearbeitungszeit.",a:"objectivity",why:"Standardisierte Bedingungen erhöhen insbesondere die Durchführungsobjektivität."},
+  {q:"Ein Intelligenztest liefert sehr stabile Ergebnisse, misst aber eigentlich vor allem Sprachkenntnisse.",a:"validity",why:"Er kann durchaus reliabel sein, aber das falsche Konstrukt messen. Dann fehlt Validität."}
+];
+let qi=0,answered=false;
+
+function renderQuiz(){
+  answered=false;
+  const item=quiz[qi];
+  document.getElementById("quizQuestion").textContent=item.q;
+  document.getElementById("quizMeta").textContent=`Beispiel ${qi+1} von ${quiz.length}`;
+  document.getElementById("feedback").textContent="";
+  document.getElementById("answers").innerHTML=order.map(k=>`<button class="answer" data-answer="${k}">${criteria[k].name}</button>`).join("");
+  document.querySelectorAll(".answer").forEach(btn=>btn.addEventListener("click",()=>{
+    if(answered)return; answered=true;
+    const item=quiz[qi],ok=btn.dataset.answer===item.a;
+    btn.classList.add(ok?"correct":"wrong");
+    if(!ok) document.querySelector(`.answer[data-answer="${item.a}"]`).classList.add("correct");
+    document.getElementById("feedback").innerHTML=ok?`<span class="ok">Richtig.</span> ${item.why}`:`<span class="bad">Noch nicht.</span> Richtig ist <strong>${criteria[item.a].name}</strong>. ${item.why}`;
+  }));
+}
+document.getElementById("nextBtn").addEventListener("click",()=>{qi=(qi+1)%quiz.length;renderQuiz();});
+document.getElementById("revealBtn").addEventListener("click",()=>{
+  const item=quiz[qi];
+  document.getElementById("feedback").innerHTML=`<strong>${criteria[item.a].name}</strong>: ${item.why}`;
+});
+renderQuiz();
+</script>
+</body>
+</html>
