@@ -118,11 +118,6 @@
       </div>
 
       <div class="ergebnis">
-        <strong>Tatsächlich</strong><br>
-        <span id="tatsaechlich">0,00</span>
-      </div>
-
-      <div class="ergebnis">
         <strong>Interpretation</strong><br>
         <span id="interpretation">kein Zusammenhang</span>
       </div>
@@ -139,7 +134,6 @@
     const regler = document.getElementById("korrelation");
     const anzeige = document.getElementById("anzeige");
     const eingestellt = document.getElementById("eingestellt");
-    const tatsaechlich = document.getElementById("tatsaechlich");
     const interpretation = document.getElementById("interpretation");
     const beispiel = document.getElementById("beispiel");
 
@@ -345,7 +339,6 @@
       // Texte aktualisieren
       anzeige.textContent = formatieren(r);
       eingestellt.textContent = formatieren(r);
-      tatsaechlich.textContent = formatieren(echteKorrelation);
       interpretation.textContent = beschreibung(r);
     }
 
