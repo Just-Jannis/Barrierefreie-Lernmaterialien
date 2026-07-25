@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Korrelation ist nicht automatisch Kausalität</title><style>
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#f2f4f7;margin:0;padding:20px;color:#222}
+.tool{max-width:900px;margin:auto;background:white;border:1px solid #ccc;border-radius:10px;padding:20px}
+h1{margin-top:0} h2{margin-top:24px}
+.steuerung{background:#f7f7f7;border:1px solid #ddd;border-radius:8px;padding:12px;margin:14px 0}
+label{display:block;font-weight:bold;margin-top:10px}
+input[type=range],select{width:100%;margin-top:5px}
+button,select,input[type=number]{padding:8px;margin-top:8px}
+button{cursor:pointer;margin-right:5px}
+canvas{width:100%;height:auto;border:1px solid #999;background:white;margin-top:10px}
+.werte{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+.wert{background:#eee;border-radius:6px;padding:10px}
+.wert strong{display:block;margin-bottom:4px}
+.hinweis{background:#eef4ff;border-left:4px solid #3d6fd8;padding:10px;margin-top:12px}
+.warnung{background:#fff2e7;border-left:4px solid #d9730d;padding:10px;margin-top:12px}
+table{width:100%;border-collapse:collapse;margin-top:12px}
+th,td{border:1px solid #ccc;padding:7px;text-align:left}
+.punkt{display:inline-block;width:13px;height:13px;border-radius:50%;margin:2px;background:#2864dc}
+.antwort{display:block;width:100%;text-align:left;margin-top:7px}
+.richtig{background:#dff5e5}.falsch{background:#fde3e0}
+@media(max-width:650px){.werte{grid-template-columns:1fr 1fr}}
+</style></head>
+<body><div class="tool"><h1>Korrelation ist nicht automatisch Kausalität</h1><p>Übe mögliche Erklärungen für beobachtete Zusammenhänge.</p>
+<div class="steuerung"><label for="fall">Beispiel auswählen</label><select id="fall"></select></div>
+<div id="beschreibung" class="hinweis"></div><h2>Welche Erklärung passt am besten?</h2><div id="antworten"></div><div id="feedback" class="hinweis"></div>
+<canvas id="c" width="820" height="300"></canvas>
+</div><script>
+const faelle=[
+{t:"Eisverkauf und Badeunfälle",x:"An heißen Tagen werden mehr Eisportionen verkauft und es gibt mehr Badeunfälle.",r:"Drittvariable",e:"Die Temperatur beeinflusst wahrscheinlich beide Variablen."},
+{t:"Lernzeit und Prüfungsergebnis",x:"Mehr Lernzeit geht häufig mit besseren Ergebnissen einher.",r:"Mögliche Ursache",e:"Eine Wirkung ist plausibel, aber Vorwissen und Motivation müssen berücksichtigt werden."},
+{t:"Stress und Schlafprobleme",x:"Menschen mit viel Stress berichten häufiger von Schlafproblemen.",r:"Wechselseitigkeit",e:"Stress kann Schlafprobleme fördern und Schlafmangel kann Stress verstärken."},
+{t:"Storchenzahl und Geburten",x:"In größeren Regionen gibt es oft mehr Störche und mehr Geburten.",r:"Drittvariable",e:"Die Größe oder Bevölkerungszahl der Region kann beide Werte erhöhen."}
+],namen=["Mögliche Ursache","Umgekehrte Ursache","Drittvariable","Wechselseitigkeit","Zufall"],sel=document.getElementById("fall");
+for(let i=0;i<faelle.length;i++){let o=document.createElement("option");o.value=i;o.textContent=faelle[i].t;sel.appendChild(o)}
+function zeichnen(){let c=document.getElementById("c"),x=c.getContext("2d");x.clearRect(0,0,c.width,c.height);x.strokeRect(70,110,180,70);x.strokeRect(570,110,180,70);x.font="18px Arial";x.fillText("Variable A",115,152);x.fillText("Variable B",615,152);x.beginPath();x.moveTo(250,145);x.lineTo(570,145);x.stroke()}
+function show(){let f=faelle[Number(sel.value)];document.getElementById("beschreibung").innerHTML="<strong>"+f.t+":</strong> "+f.x;document.getElementById("feedback").textContent="Wähle eine Erklärung.";let b=document.getElementById("antworten");b.innerHTML="";
+ for(let name of namen){let bt=document.createElement("button");bt.className="antwort";bt.textContent=name;bt.onclick=()=>{bt.classList.add(name===f.r?"richtig":"falsch");document.getElementById("feedback").innerHTML=name===f.r?"<strong>Passend.</strong> "+f.e:"<strong>Noch nicht.</strong> Am besten passt: "+f.r+". "+f.e};b.appendChild(bt)}zeichnen()}
+sel.onchange=show;show();
+</script></body></html>

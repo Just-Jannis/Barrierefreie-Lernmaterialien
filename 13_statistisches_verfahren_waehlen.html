@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Welches statistische Verfahren passt?</title><style>
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#f2f4f7;margin:0;padding:20px;color:#222}
+.tool{max-width:900px;margin:auto;background:white;border:1px solid #ccc;border-radius:10px;padding:20px}
+h1{margin-top:0} h2{margin-top:24px}
+.steuerung{background:#f7f7f7;border:1px solid #ddd;border-radius:8px;padding:12px;margin:14px 0}
+label{display:block;font-weight:bold;margin-top:10px}
+input[type=range],select{width:100%;margin-top:5px}
+button,select,input[type=number]{padding:8px;margin-top:8px}
+button{cursor:pointer;margin-right:5px}
+canvas{width:100%;height:auto;border:1px solid #999;background:white;margin-top:10px}
+.werte{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+.wert{background:#eee;border-radius:6px;padding:10px}
+.wert strong{display:block;margin-bottom:4px}
+.hinweis{background:#eef4ff;border-left:4px solid #3d6fd8;padding:10px;margin-top:12px}
+.warnung{background:#fff2e7;border-left:4px solid #d9730d;padding:10px;margin-top:12px}
+table{width:100%;border-collapse:collapse;margin-top:12px}
+th,td{border:1px solid #ccc;padding:7px;text-align:left}
+.punkt{display:inline-block;width:13px;height:13px;border-radius:50%;margin:2px;background:#2864dc}
+.antwort{display:block;width:100%;text-align:left;margin-top:7px}
+.richtig{background:#dff5e5}.falsch{background:#fde3e0}
+@media(max-width:650px){.werte{grid-template-columns:1fr 1fr}}
+</style></head>
+<body><div class="tool"><h1>Welches statistische Verfahren passt?</h1><p>Beantworte einfache Fragen und erhalte einen typischen Vorschlag.</p>
+<div class="steuerung">
+<label for="ziel">Art der Zielvariable</label><select id="ziel"><option value="metrisch">metrisch</option><option value="ordinal">ordinal</option><option value="kategorial">kategorial</option></select>
+<label for="frage">Was möchtest du untersuchen?</label><select id="frage"><option value="unterschied">Unterschied zwischen Gruppen</option><option value="zusammenhang">Zusammenhang zwischen Variablen</option><option value="haeufigkeit">Verteilung von Häufigkeiten</option></select>
+<label for="gruppen">Anzahl der Gruppen</label><select id="gruppen"><option value="2">zwei Gruppen</option><option value="mehr">mehr als zwei Gruppen</option></select>
+<label for="abh">Sind Messungen abhängig/gepaart?</label><select id="abh"><option value="nein">nein</option><option value="ja">ja</option></select>
+</div>
+<div class="hinweis"><h2 id="vorschlag"></h2><p id="grund"></p></div>
+<div class="warnung">Didaktische Orientierung: In echten Analysen müssen zusätzlich Voraussetzungen und Forschungsdesign geprüft werden.</div>
+</div><script>
+const ziel=document.getElementById("ziel"),frage=document.getElementById("frage"),gruppen=document.getElementById("gruppen"),abh=document.getElementById("abh");
+function update(){let t="",g="";if(frage.value==="haeufigkeit"||ziel.value==="kategorial"){t="Chi-Quadrat-Test";g="Kategoriale Häufigkeiten werden verglichen."}
+else if(frage.value==="zusammenhang"){if(ziel.value==="metrisch"){t="Pearson-Korrelation oder lineare Regression";g="Zwei metrische Variablen werden auf einen linearen Zusammenhang geprüft."}else{t="Spearman-Rangkorrelation";g="Mindestens eine Variable ist ordinal."}}
+else if(gruppen.value==="2"){if(ziel.value==="metrisch"){t=abh.value==="ja"?"gepaarter t-Test":"t-Test für unabhängige Gruppen";g="Zwei Gruppen oder Messzeitpunkte werden metrisch verglichen."}else{t=abh.value==="ja"?"Wilcoxon-Test":"Mann-Whitney-U-Test";g="Nichtparametrische Alternative für ordinale Daten."}}
+else{if(ziel.value==="metrisch"){t=abh.value==="ja"?"ANOVA mit Messwiederholung":"einfaktorielle ANOVA";g="Mehr als zwei Gruppen oder Messzeitpunkte werden verglichen."}else{t=abh.value==="ja"?"Friedman-Test":"Kruskal-Wallis-Test";g="Nichtparametrischer Vergleich mehrerer Gruppen."}}
+document.getElementById("vorschlag").textContent=t;document.getElementById("grund").textContent=g}
+ziel.onchange=update;frage.onchange=update;gruppen.onchange=update;abh.onchange=update;update();
+</script></body></html>

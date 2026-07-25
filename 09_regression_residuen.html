@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Regression und Residuen</title><style>
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#f2f4f7;margin:0;padding:20px;color:#222}
+.tool{max-width:900px;margin:auto;background:white;border:1px solid #ccc;border-radius:10px;padding:20px}
+h1{margin-top:0} h2{margin-top:24px}
+.steuerung{background:#f7f7f7;border:1px solid #ddd;border-radius:8px;padding:12px;margin:14px 0}
+label{display:block;font-weight:bold;margin-top:10px}
+input[type=range],select{width:100%;margin-top:5px}
+button,select,input[type=number]{padding:8px;margin-top:8px}
+button{cursor:pointer;margin-right:5px}
+canvas{width:100%;height:auto;border:1px solid #999;background:white;margin-top:10px}
+.werte{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+.wert{background:#eee;border-radius:6px;padding:10px}
+.wert strong{display:block;margin-bottom:4px}
+.hinweis{background:#eef4ff;border-left:4px solid #3d6fd8;padding:10px;margin-top:12px}
+.warnung{background:#fff2e7;border-left:4px solid #d9730d;padding:10px;margin-top:12px}
+table{width:100%;border-collapse:collapse;margin-top:12px}
+th,td{border:1px solid #ccc;padding:7px;text-align:left}
+.punkt{display:inline-block;width:13px;height:13px;border-radius:50%;margin:2px;background:#2864dc}
+.antwort{display:block;width:100%;text-align:left;margin-top:7px}
+.richtig{background:#dff5e5}.falsch{background:#fde3e0}
+@media(max-width:650px){.werte{grid-template-columns:1fr 1fr}}
+</style></head>
+<body><div class="tool"><h1>Regression und Residuen</h1><p>Verändere einen Punkt und beobachte Gerade, Residuen und R².</p>
+<div class="steuerung"><label for="punkt">Punkt auswählen</label><select id="punkt"></select><label for="yr">y-Wert: <span id="ya"></span></label><input id="yr" type="range" min="0" max="20" value="5"><button id="neu">Neue Beispieldaten</button></div>
+<canvas id="c" width="820" height="440"></canvas>
+<div class="werte"><div class="wert"><strong>Achsenabschnitt b₀</strong><span id="b0"></span></div><div class="wert"><strong>Steigung b₁</strong><span id="b1"></span></div><div class="wert"><strong>R²</strong><span id="r2"></span></div><div class="wert"><strong>Quadratsumme Residuen</strong><span id="sse"></span></div></div>
+</div><script>
+const c=document.getElementById("c"),ctx=c.getContext("2d"),pa=document.getElementById("punkt"),yr=document.getElementById("yr"),xs=[1,2,3,4,5,6,7,8];let ys=[3,5,5,8,9,12,13,15];
+for(let i=0;i<xs.length;i++){let o=document.createElement("option");o.value=i;o.textContent="Punkt "+(i+1)+" (x = "+xs[i]+")";pa.appendChild(o)}
+function mittel(v){let s=0;for(let x of v)s+=x;return s/v.length}
+function reg(){let mx=mittel(xs),my=mittel(ys),z=0,n=0;for(let i=0;i<xs.length;i++){z+=(xs[i]-mx)*(ys[i]-my);n+=(xs[i]-mx)*(xs[i]-mx)}let b1=z/n,b0=my-b1*mx,sse=0,sst=0;for(let i=0;i<xs.length;i++){let y=b0+b1*xs[i];sse+=(ys[i]-y)**2;sst+=(ys[i]-my)**2}return{b0,b1,sse,r2:1-sse/sst}}
+function sx(x){return 60+x/9*700}function sy(y){return 390-y/20*340}
+function zeichnen(){let r=reg();ctx.clearRect(0,0,c.width,c.height);ctx.strokeStyle="#cc3333";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(sx(0),sy(r.b0));ctx.lineTo(sx(9),sy(r.b0+r.b1*9));ctx.stroke();
+ for(let i=0;i<xs.length;i++){let yhat=r.b0+r.b1*xs[i];ctx.strokeStyle="#999";ctx.beginPath();ctx.moveTo(sx(xs[i]),sy(ys[i]));ctx.lineTo(sx(xs[i]),sy(yhat));ctx.stroke();ctx.fillStyle=i===Number(pa.value)?"#d9730d":"#2864dc";ctx.beginPath();ctx.arc(sx(xs[i]),sy(ys[i]),7,0,2*Math.PI);ctx.fill()}
+ document.getElementById("b0").textContent=r.b0.toFixed(2).replace(".",",");document.getElementById("b1").textContent=r.b1.toFixed(2).replace(".",",");document.getElementById("r2").textContent=r.r2.toFixed(2).replace(".",",");document.getElementById("sse").textContent=r.sse.toFixed(2).replace(".",",")}
+function wechsel(){let i=Number(pa.value);yr.value=ys[i];document.getElementById("ya").textContent=ys[i].toFixed(1).replace(".",",");zeichnen()}
+yr.oninput=()=>{ys[Number(pa.value)]=Number(yr.value);wechsel()};pa.onchange=wechsel;document.getElementById("neu").onclick=()=>{ys=xs.map(x=>2+1.5*x+(Math.random()-.5)*6);wechsel()};wechsel();
+</script></body></html>

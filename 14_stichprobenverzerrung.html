@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Stichprobenverzerrung und Repräsentativität</title><style>
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#f2f4f7;margin:0;padding:20px;color:#222}
+.tool{max-width:900px;margin:auto;background:white;border:1px solid #ccc;border-radius:10px;padding:20px}
+h1{margin-top:0} h2{margin-top:24px}
+.steuerung{background:#f7f7f7;border:1px solid #ddd;border-radius:8px;padding:12px;margin:14px 0}
+label{display:block;font-weight:bold;margin-top:10px}
+input[type=range],select{width:100%;margin-top:5px}
+button,select,input[type=number]{padding:8px;margin-top:8px}
+button{cursor:pointer;margin-right:5px}
+canvas{width:100%;height:auto;border:1px solid #999;background:white;margin-top:10px}
+.werte{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+.wert{background:#eee;border-radius:6px;padding:10px}
+.wert strong{display:block;margin-bottom:4px}
+.hinweis{background:#eef4ff;border-left:4px solid #3d6fd8;padding:10px;margin-top:12px}
+.warnung{background:#fff2e7;border-left:4px solid #d9730d;padding:10px;margin-top:12px}
+table{width:100%;border-collapse:collapse;margin-top:12px}
+th,td{border:1px solid #ccc;padding:7px;text-align:left}
+.punkt{display:inline-block;width:13px;height:13px;border-radius:50%;margin:2px;background:#2864dc}
+.antwort{display:block;width:100%;text-align:left;margin-top:7px}
+.richtig{background:#dff5e5}.falsch{background:#fde3e0}
+@media(max-width:650px){.werte{grid-template-columns:1fr 1fr}}
+</style></head>
+<body><div class="tool"><h1>Stichprobenverzerrung und Repräsentativität</h1><p>Vergleiche verschiedene Auswahlmethoden.</p>
+<div class="steuerung"><label for="methode">Auswahlmethode</label><select id="methode"><option value="zufall">Zufällige Stichprobe</option><option value="freiwillig">Freiwillige Onlineumfrage</option><option value="ort">Nur an einem Ort befragen</option><option value="geschichtet">Geschichtete Stichprobe</option></select>
+<label for="n">Stichprobengröße: <span id="na">50</span></label><input id="n" type="range" min="10" max="150" value="50"><button id="ziehen">Stichprobe ziehen</button></div>
+<div id="punkte"></div>
+<div class="werte"><div class="wert"><strong>Anteil A Population</strong><span>60 %</span></div><div class="wert"><strong>Anteil A Stichprobe</strong><span id="aa"></span></div><div class="wert"><strong>Mittel Population</strong><span id="pm"></span></div><div class="wert"><strong>Mittel Stichprobe</strong><span id="sm"></span></div></div><div class="hinweis" id="info"></div>
+</div><script>
+const methode=document.getElementById("methode"),n=document.getElementById("n");let pop=[],sample=[];
+for(let i=0;i<500;i++){let A=i<300,m=A?60:40;pop.push({g:A?"A":"B",w:m+(Math.random()-.5)*20})}
+function mittel(v){let s=0;for(let p of v)s+=p.w;return s/v.length}function zuf(v){return v[Math.floor(Math.random()*v.length)]}
+function ziehen(){sample=[];let nn=Number(n.value);if(methode.value==="geschichtet"){let A=pop.filter(p=>p.g==="A"),B=pop.filter(p=>p.g==="B"),na=Math.round(nn*.6);for(let i=0;i<na;i++)sample.push(zuf(A));for(let i=na;i<nn;i++)sample.push(zuf(B))}
+else while(sample.length<nn){let p=zuf(pop);if(methode.value==="zufall")sample.push(p);if(methode.value==="freiwillig"&&Math.random()<p.w/100)sample.push(p);if(methode.value==="ort"&&(p.g==="A"||Math.random()<.15))sample.push(p)}update()}
+function update(){let a=sample.filter(p=>p.g==="A").length/sample.length*100;document.getElementById("na").textContent=n.value;document.getElementById("aa").textContent=a.toFixed(1).replace(".",",")+" %";document.getElementById("pm").textContent=mittel(pop).toFixed(2).replace(".",",");document.getElementById("sm").textContent=mittel(sample).toFixed(2).replace(".",",");
+ let b=document.getElementById("punkte");b.innerHTML="";for(let p of sample.slice(0,120)){let d=document.createElement("span");d.className="punkt";d.style.backgroundColor=p.g==="A"?"#2864dc":"#d9730d";b.appendChild(d)}
+ document.getElementById("info").textContent=methode.value==="zufall"?"Bei einer Zufallsstichprobe hat grundsätzlich jede Person eine Auswahlchance.":methode.value==="geschichtet"?"Die Gruppenanteile werden gezielt an die Population angepasst.":"Die Auswahl bevorzugt bestimmte Personen. Auch eine große Stichprobe kann verzerrt sein."}
+n.oninput=()=>document.getElementById("na").textContent=n.value;document.getElementById("ziehen").onclick=ziehen;ziehen();
+</script></body></html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Fehlende Werte</title><style>
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#f2f4f7;margin:0;padding:20px;color:#222}
+.tool{max-width:900px;margin:auto;background:white;border:1px solid #ccc;border-radius:10px;padding:20px}
+h1{margin-top:0} h2{margin-top:24px}
+.steuerung{background:#f7f7f7;border:1px solid #ddd;border-radius:8px;padding:12px;margin:14px 0}
+label{display:block;font-weight:bold;margin-top:10px}
+input[type=range],select{width:100%;margin-top:5px}
+button,select,input[type=number]{padding:8px;margin-top:8px}
+button{cursor:pointer;margin-right:5px}
+canvas{width:100%;height:auto;border:1px solid #999;background:white;margin-top:10px}
+.werte{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+.wert{background:#eee;border-radius:6px;padding:10px}
+.wert strong{display:block;margin-bottom:4px}
+.hinweis{background:#eef4ff;border-left:4px solid #3d6fd8;padding:10px;margin-top:12px}
+.warnung{background:#fff2e7;border-left:4px solid #d9730d;padding:10px;margin-top:12px}
+table{width:100%;border-collapse:collapse;margin-top:12px}
+th,td{border:1px solid #ccc;padding:7px;text-align:left}
+.punkt{display:inline-block;width:13px;height:13px;border-radius:50%;margin:2px;background:#2864dc}
+.antwort{display:block;width:100%;text-align:left;margin-top:7px}
+.richtig{background:#dff5e5}.falsch{background:#fde3e0}
+@media(max-width:650px){.werte{grid-template-columns:1fr 1fr}}
+</style></head>
+<body><div class="tool"><h1>Fehlende Werte</h1><p>Vergleiche verschiedene Fehlmuster und einfache Auswertungsstrategien.</p>
+<div class="steuerung"><label for="muster">Muster der fehlenden Werte</label><select id="muster"><option value="mcar">völlig zufällig (MCAR)</option><option value="mar">abhängig von Gruppe (MAR, vereinfacht)</option><option value="mnar">hohe Werte fehlen häufiger (MNAR)</option></select>
+<label for="methode">Umgang mit fehlenden Werten</label><select id="methode"><option value="loeschen">Fälle löschen</option><option value="mittel">Mittelwert einsetzen</option></select><button id="neu">Neue fehlende Werte erzeugen</button></div>
+<table><thead><tr><th>Person</th><th>Gruppe</th><th>Original</th><th>Beobachtet</th><th>Verwendet</th></tr></thead><tbody id="tab"></tbody></table>
+<div class="werte"><div class="wert"><strong>Wahrer Mittelwert</strong><span id="wahr"></span></div><div class="wert"><strong>Beobachtet</strong><span id="beob"></span></div><div class="wert"><strong>Nach Methode</strong><span id="nach"></span></div><div class="wert"><strong>Fehlend</strong><span id="fehl"></span></div></div><div class="hinweis" id="info"></div>
+</div><script>
+const original=[{g:"A",w:42},{g:"A",w:45},{g:"A",w:48},{g:"A",w:52},{g:"A",w:55},{g:"B",w:58},{g:"B",w:62},{g:"B",w:68},{g:"B",w:74},{g:"B",w:82}],muster=document.getElementById("muster"),methode=document.getElementById("methode");let daten=[];
+function mittel(v){if(!v.length)return NaN;let s=0;for(let x of v)s+=x;return s/v.length}
+function erzeugen(){daten=[];for(let p of original){let f=false;if(muster.value==="mcar")f=Math.random()<.25;if(muster.value==="mar")f=p.g==="B"?Math.random()<.45:Math.random()<.1;if(muster.value==="mnar")f=Math.random()<p.w/140;daten.push({g:p.g,o:p.w,b:f?null:p.w})}update()}
+function update(){let vorhanden=daten.filter(p=>p.b!==null).map(p=>p.b),ersatz=mittel(vorhanden),verwendet=[],fehl=0,t=document.getElementById("tab");t.innerHTML="";
+ for(let i=0;i<daten.length;i++){let p=daten[i],benutzt="gelöscht";if(p.b!==null){verwendet.push(p.b);benutzt=p.b}else{fehl++;if(methode.value==="mittel"){verwendet.push(ersatz);benutzt=ersatz.toFixed(1).replace(".",",")}}let tr=document.createElement("tr");tr.innerHTML="<td>"+(i+1)+"</td><td>"+p.g+"</td><td>"+p.o+"</td><td>"+(p.b===null?"fehlt":p.b)+"</td><td>"+benutzt+"</td>";t.appendChild(tr)}
+ let wahr=mittel(original.map(p=>p.w)),beob=mittel(vorhanden),nach=mittel(verwendet);document.getElementById("wahr").textContent=wahr.toFixed(2).replace(".",",");document.getElementById("beob").textContent=Number.isNaN(beob)?"–":beob.toFixed(2).replace(".",",");document.getElementById("nach").textContent=Number.isNaN(nach)?"–":nach.toFixed(2).replace(".",",");document.getElementById("fehl").textContent=fehl;
+ document.getElementById("info").textContent=muster.value==="mcar"?"Das Fehlen ist zufällig.":muster.value==="mar"?"Das Fehlen hängt mit einer beobachteten Gruppe zusammen.":"Hohe Werte fehlen häufiger; der Mittelwert kann dadurch zu niedrig werden."}
+muster.onchange=erzeugen;methode.onchange=update;document.getElementById("neu").onclick=erzeugen;erzeugen();
+</script></body></html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Normalverteilung und z-Wert</title><style>
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#f2f4f7;margin:0;padding:20px;color:#222}
+.tool{max-width:900px;margin:auto;background:white;border:1px solid #ccc;border-radius:10px;padding:20px}
+h1{margin-top:0} h2{margin-top:24px}
+.steuerung{background:#f7f7f7;border:1px solid #ddd;border-radius:8px;padding:12px;margin:14px 0}
+label{display:block;font-weight:bold;margin-top:10px}
+input[type=range],select{width:100%;margin-top:5px}
+button,select,input[type=number]{padding:8px;margin-top:8px}
+button{cursor:pointer;margin-right:5px}
+canvas{width:100%;height:auto;border:1px solid #999;background:white;margin-top:10px}
+.werte{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+.wert{background:#eee;border-radius:6px;padding:10px}
+.wert strong{display:block;margin-bottom:4px}
+.hinweis{background:#eef4ff;border-left:4px solid #3d6fd8;padding:10px;margin-top:12px}
+.warnung{background:#fff2e7;border-left:4px solid #d9730d;padding:10px;margin-top:12px}
+table{width:100%;border-collapse:collapse;margin-top:12px}
+th,td{border:1px solid #ccc;padding:7px;text-align:left}
+.punkt{display:inline-block;width:13px;height:13px;border-radius:50%;margin:2px;background:#2864dc}
+.antwort{display:block;width:100%;text-align:left;margin-top:7px}
+.richtig{background:#dff5e5}.falsch{background:#fde3e0}
+@media(max-width:650px){.werte{grid-template-columns:1fr 1fr}}
+</style></head>
+<body><div class="tool"><h1>Normalverteilung und z-Wert</h1><p>Der z-Wert gibt den Abstand in Standardabweichungen an.</p>
+<div class="steuerung">
+<label for="m">Mittelwert μ: <span id="ma">50</span></label><input id="m" type="range" min="0" max="100" value="50">
+<label for="sd">Standardabweichung σ: <span id="sa">10</span></label><input id="sd" type="range" min="1" max="25" value="10">
+<label for="x">Beobachteter Wert x: <span id="xa">65</span></label><input id="x" type="range" min="0" max="100" value="65">
+</div>
+<canvas id="c" width="820" height="360"></canvas>
+<div class="werte"><div class="wert"><strong>z-Wert</strong><span id="zw"></span></div><div class="wert"><strong>Abstand</strong><span id="ab"></span></div><div class="wert"><strong>Ungefähres Perzentil</strong><span id="per"></span></div><div class="wert"><strong>Einordnung</strong><span id="ein"></span></div></div>
+</div><script>
+function erf(x){const s=x<0?-1:1;x=Math.abs(x);const a1=.254829592,a2=-.284496736,a3=1.421413741,a4=-1.453152027,a5=1.061405429,p=.3275911,t=1/(1+p*x);const y=1-(((((a5*t+a4)*t+a3)*t+a2)*t+a1)*t)*Math.exp(-x*x);return s*y}
+function Phi(z){return .5*(1+erf(z/Math.sqrt(2)))}
+function dichte(x,m,s){return 1/(s*Math.sqrt(2*Math.PI))*Math.exp(-.5*Math.pow((x-m)/s,2))}
+
+const c=document.getElementById("c"),ctx=c.getContext("2d"),m=document.getElementById("m"),sd=document.getElementById("sd"),xx=document.getElementById("x");
+function px(x){return 50+x/100*720}
+function update(){let mu=Number(m.value),s=Number(sd.value),x=Number(xx.value),z=(x-mu)/s;ctx.clearRect(0,0,c.width,c.height);ctx.beginPath();ctx.moveTo(50,310);ctx.lineTo(770,310);ctx.strokeStyle="#777";ctx.stroke();
+ ctx.strokeStyle="#2864dc";ctx.lineWidth=3;ctx.beginPath();let first=true;for(let a=0;a<=100;a+=.5){let X=px(a),Y=310-dichte(a,mu,s)*5000;if(first){ctx.moveTo(X,Y);first=false}else ctx.lineTo(X,Y)}ctx.stroke();
+ ctx.strokeStyle="#cc3333";ctx.beginPath();ctx.moveTo(px(x),35);ctx.lineTo(px(x),310);ctx.stroke();
+ document.getElementById("ma").textContent=mu;document.getElementById("sa").textContent=s;document.getElementById("xa").textContent=x;document.getElementById("zw").textContent=z.toFixed(2).replace(".",",");document.getElementById("ab").textContent=Math.abs(x-mu)+" Punkte";document.getElementById("per").textContent=(Phi(z)*100).toFixed(1).replace(".",",")+" %";document.getElementById("ein").textContent=Math.abs(z)<1?"nah am Mittelwert":Math.abs(z)<2?"auffällig":"sehr weit vom Mittelwert"}
+m.oninput=update;sd.oninput=update;xx.oninput=update;update();
+</script></body></html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Simpsons Paradoxon</title><style>
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#f2f4f7;margin:0;padding:20px;color:#222}
+.tool{max-width:900px;margin:auto;background:white;border:1px solid #ccc;border-radius:10px;padding:20px}
+h1{margin-top:0} h2{margin-top:24px}
+.steuerung{background:#f7f7f7;border:1px solid #ddd;border-radius:8px;padding:12px;margin:14px 0}
+label{display:block;font-weight:bold;margin-top:10px}
+input[type=range],select{width:100%;margin-top:5px}
+button,select,input[type=number]{padding:8px;margin-top:8px}
+button{cursor:pointer;margin-right:5px}
+canvas{width:100%;height:auto;border:1px solid #999;background:white;margin-top:10px}
+.werte{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+.wert{background:#eee;border-radius:6px;padding:10px}
+.wert strong{display:block;margin-bottom:4px}
+.hinweis{background:#eef4ff;border-left:4px solid #3d6fd8;padding:10px;margin-top:12px}
+.warnung{background:#fff2e7;border-left:4px solid #d9730d;padding:10px;margin-top:12px}
+table{width:100%;border-collapse:collapse;margin-top:12px}
+th,td{border:1px solid #ccc;padding:7px;text-align:left}
+.punkt{display:inline-block;width:13px;height:13px;border-radius:50%;margin:2px;background:#2864dc}
+.antwort{display:block;width:100%;text-align:left;margin-top:7px}
+.richtig{background:#dff5e5}.falsch{background:#fde3e0}
+@media(max-width:650px){.werte{grid-template-columns:1fr 1fr}}
+</style></head>
+<body><div class="tool"><h1>Simpsons Paradoxon</h1><p>Getrennte Gruppen können einen anderen Trend zeigen als die Gesamtdaten.</p>
+<div class="steuerung"><label><input id="gruppen" type="checkbox" checked> Gruppen getrennt betrachten</label></div>
+<canvas id="c" width="820" height="440"></canvas>
+<div class="werte"><div class="wert"><strong>Korrelation Gruppe A</strong><span id="a"></span></div><div class="wert"><strong>Korrelation Gruppe B</strong><span id="b"></span></div><div class="wert"><strong>Korrelation insgesamt</strong><span id="g"></span></div><div class="wert"><strong>Ansicht</strong><span id="ans"></span></div></div>
+</div><script>
+const c=document.getElementById("c"),ctx=c.getContext("2d"),sw=document.getElementById("gruppen"),A=[{x:1,y:8},{x:2,y:9},{x:3,y:10},{x:4,y:11}],B=[{x:6,y:1},{x:7,y:2},{x:8,y:3},{x:9,y:4}];
+function mittel(v){let s=0;for(let x of v)s+=x;return s/v.length}
+function kor(p){let xs=p.map(z=>z.x),ys=p.map(z=>z.y),mx=mittel(xs),my=mittel(ys),o=0,ux=0,uy=0;for(let i=0;i<p.length;i++){let dx=xs[i]-mx,dy=ys[i]-my;o+=dx*dy;ux+=dx*dx;uy+=dy*dy}return o/Math.sqrt(ux*uy)}
+function sx(x){return 60+x/10*700}function sy(y){return 390-y/12*340}
+function punkte(p,f){ctx.fillStyle=f;for(let z of p){ctx.beginPath();ctx.arc(sx(z.x),sy(z.y),8,0,2*Math.PI);ctx.fill()}}
+function linie(p,f){ctx.strokeStyle=f;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(sx(p[0].x),sy(p[0].y));ctx.lineTo(sx(p[p.length-1].x),sy(p[p.length-1].y));ctx.stroke()}
+function update(){ctx.clearRect(0,0,c.width,c.height);punkte(A,"#2864dc");punkte(B,"#198754");if(sw.checked){linie(A,"#2864dc");linie(B,"#198754");document.getElementById("ans").textContent="getrennt"}else{ctx.strokeStyle="#cc3333";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(sx(1),sy(10));ctx.lineTo(sx(9),sy(2));ctx.stroke();document.getElementById("ans").textContent="zusammen"}document.getElementById("a").textContent=kor(A).toFixed(2).replace(".",",");document.getElementById("b").textContent=kor(B).toFixed(2).replace(".",",");document.getElementById("g").textContent=kor(A.concat(B)).toFixed(2).replace(".",",")}
+sw.onchange=update;update();
+</script></body></html>

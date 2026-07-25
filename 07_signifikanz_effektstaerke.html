@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Signifikanz und Effektstärke</title><style>
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#f2f4f7;margin:0;padding:20px;color:#222}
+.tool{max-width:900px;margin:auto;background:white;border:1px solid #ccc;border-radius:10px;padding:20px}
+h1{margin-top:0} h2{margin-top:24px}
+.steuerung{background:#f7f7f7;border:1px solid #ddd;border-radius:8px;padding:12px;margin:14px 0}
+label{display:block;font-weight:bold;margin-top:10px}
+input[type=range],select{width:100%;margin-top:5px}
+button,select,input[type=number]{padding:8px;margin-top:8px}
+button{cursor:pointer;margin-right:5px}
+canvas{width:100%;height:auto;border:1px solid #999;background:white;margin-top:10px}
+.werte{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+.wert{background:#eee;border-radius:6px;padding:10px}
+.wert strong{display:block;margin-bottom:4px}
+.hinweis{background:#eef4ff;border-left:4px solid #3d6fd8;padding:10px;margin-top:12px}
+.warnung{background:#fff2e7;border-left:4px solid #d9730d;padding:10px;margin-top:12px}
+table{width:100%;border-collapse:collapse;margin-top:12px}
+th,td{border:1px solid #ccc;padding:7px;text-align:left}
+.punkt{display:inline-block;width:13px;height:13px;border-radius:50%;margin:2px;background:#2864dc}
+.antwort{display:block;width:100%;text-align:left;margin-top:7px}
+.richtig{background:#dff5e5}.falsch{background:#fde3e0}
+@media(max-width:650px){.werte{grid-template-columns:1fr 1fr}}
+</style></head>
+<body><div class="tool"><h1>Signifikanz und Effektstärke</h1><p>p-Wert und Effektstärke beantworten unterschiedliche Fragen.</p>
+<div class="steuerung">
+<label for="diff">Mittelwertsunterschied: <span id="da">5</span></label><input id="diff" type="range" min="0" max="20" value="5">
+<label for="sd">Standardabweichung: <span id="sa">10</span></label><input id="sd" type="range" min="2" max="20" value="10">
+<label for="n">Personen pro Gruppe: <span id="na">20</span></label><input id="n" type="range" min="5" max="200" value="20">
+</div>
+<canvas id="c" width="820" height="340"></canvas>
+<div class="werte"><div class="wert"><strong>Cohen d</strong><span id="dw"></span></div><div class="wert"><strong>z-Wert</strong><span id="zw"></span></div><div class="wert"><strong>p-Wert</strong><span id="pw"></span></div><div class="wert"><strong>Entscheidung</strong><span id="ent"></span></div></div>
+<div class="warnung">Vereinfachte Normalapproximation für zwei unabhängige Gruppen.</div>
+</div><script>
+function erf(x){const s=x<0?-1:1;x=Math.abs(x);const a1=.254829592,a2=-.284496736,a3=1.421413741,a4=-1.453152027,a5=1.061405429,p=.3275911,t=1/(1+p*x);const y=1-(((((a5*t+a4)*t+a3)*t+a2)*t+a1)*t)*Math.exp(-x*x);return s*y}
+function Phi(z){return .5*(1+erf(z/Math.sqrt(2)))}
+function dichte(x,m,s){return 1/(s*Math.sqrt(2*Math.PI))*Math.exp(-.5*Math.pow((x-m)/s,2))}
+
+const c=document.getElementById("c"),ctx=c.getContext("2d"),di=document.getElementById("diff"),sd=document.getElementById("sd"),n=document.getElementById("n");
+function px(x){return 50+(x+30)/80*720}function py(y){return 300-y*700}
+function kurve(m,s,f){ctx.strokeStyle=f;ctx.lineWidth=3;ctx.beginPath();let first=true;for(let x=-30;x<=50;x+=.4){let xx=px(x),yy=py(dichte(x,m,s));if(first){ctx.moveTo(xx,yy);first=false}else ctx.lineTo(xx,yy)}ctx.stroke()}
+function update(){let diff=Number(di.value),s=Number(sd.value),nn=Number(n.value),d=diff/s,se=s*Math.sqrt(2/nn),z=diff/se,p=2*(1-Phi(Math.abs(z)));
+ ctx.clearRect(0,0,c.width,c.height);ctx.beginPath();ctx.moveTo(50,300);ctx.lineTo(770,300);ctx.strokeStyle="#777";ctx.stroke();kurve(0,s,"#2864dc");kurve(diff,s,"#198754");
+ document.getElementById("da").textContent=diff;document.getElementById("sa").textContent=s;document.getElementById("na").textContent=nn;document.getElementById("dw").textContent=d.toFixed(2).replace(".",",");document.getElementById("zw").textContent=z.toFixed(2).replace(".",",");document.getElementById("pw").textContent=p<.001?"< 0,001":p.toFixed(3).replace(".",",");document.getElementById("ent").textContent=p<.05?"statistisch signifikant":"nicht signifikant"}
+di.oninput=update;sd.oninput=update;n.oninput=update;update();
+</script></body></html>
